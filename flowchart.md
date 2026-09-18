@@ -1,45 +1,39 @@
 ```mermaid
 flowchart TD
-    A["[User] Học viên mở bài học & chọn đoạn tài liệu"] --> B["[User] Nhập câu hỏi làm rõ"]
+    A["[Học viên] Mở bài học & Bôi đen đoạn tài liệu"] --> B["[Học viên] Nhập câu hỏi thắc mắc"]
 
-    B --> C{"[AI Quyết định 1]<br/>Câu hỏi đủ rõ & Đúng phạm vi?"}
+    B --> C{"[Cổng 1: Decision 1]<br/>Câu hỏi đủ rõ & Đúng thẩm quyền?"}
 
-    C -- Mơ hồ / Chưa rõ --> D["[AI] Sinh câu hỏi làm rõ"]
-    D --> E["[User] Bổ sung ý câu hỏi"]
+    %% Nhánh Cổng 1
+    C -- "Mơ hồ / Rác (AMBIGUOUS)" --> D["[AI] Sinh câu hỏi làm rõ / Hướng dẫn mô tả cụ thể"]
+    D --> E["[Học viên] Bổ sung ngữ cảnh câu hỏi"]
     E --> B
 
-    C -- Ngoài phạm vi / Vi phạm --> X["[AI] Từ chối khéo & Hướng dẫn quy định/gặp TA"]
-    X --> O
+    C -- "Vượt thẩm quyền / Injection (OUT_OF_SCOPE)" --> X["[AI] Từ chối khéo léo & Hướng dẫn gặp Giảng viên/TA"]
+    X --> FIN1["[Kết thúc tương tác]"]
 
-    C -- Đủ rõ & Hợp lệ --> F["[Hệ thống] Truy xuất RAG các đoạn nguồn liên quan"]
+    %% Qua Cổng 1 -> Cổng 2
+    C -- "Đủ rõ & Hợp lệ (CLEAR)" --> F["[RAG Engine] Nhận đoạn trích dẫn nguồn & Số trang"]
+    F --> G{"[Cổng 2: Decision 2]<br/>Đoạn nguồn có hỗ trợ TRỰC TIẾP?"}
 
-    F --> G{"[AI Quyết định 2]<br/>Đoạn nguồn có hỗ trợ TRỰC TIẾP?"}
+    %% Nhánh Cổng 2
+    G -- "Thiếu nguồn (NOT_SUPPORTED)" --> H["[System] Nhận diện: INSUFFICIENT_GROUNDING"]
+    H --> I["[AI] Nêu rõ giới hạn tài liệu & Gợi ý chọn trang khác/hỏi TA"]
+    I --> FIN2["[Kết thúc / Học viên chọn lại]"]
 
-    G -- Thiếu nguồn --> H["[Hệ thống] Nhận diện: Chưa đủ căn cứ"]
-    H --> I["[AI] Nêu giới hạn nguồn & Gợi ý đổi bài học/gặp TA"]
-    I --> B
+    %% Qua Cổng 2 -> Generation
+    G -- "Có hỗ trợ (SUPPORTED)" --> J["[AI Generation]<br/>Sinh câu trả lời ngắn gọn + Trích dẫn Citation [trang N]"]
 
-    G -- Có hỗ trợ --> J["[AI Generation]<br/>Sinh câu trả lời ngắn kèm Citation"]
+    %% Cổng 3: Validator
+    J --> K{"[Cổng 3: Decision 3 Validator]<br/>Đối soát: Citation & Nội dung khớp 100%?"}
 
-    J --> K{"[AI Validator - Quyết định 3]<br/>Kiểm tra Citation có khớp 100%?"}
+    %% Nhánh Cổng 3
+    K -- "Có dấu hiệu suy diễn / Lệch nguồn" --> H
+    K -- "Đạt chuẩn 100% (PASSED)" --> L["[UI System] Hiển thị câu trả lời + Trạng thái GROUNDED (Có căn cứ)"]
 
-    K -- Không / Lỗi bịa --> H
-    K -- Đạt chuẩn --> L["[Hệ thống UI] Hiển thị câu trả lời + Trạng thái 'Có căn cứ'"]
-
-    L --> M["[User] Tuỳ chọn Click Citation để đối chiếu nguồn gốc"]
-    L --> N{"[User đánh giá]<br/>Câu trả lời có hữu ích?"}
-    M --> N
-
-    N -- Có / Tốt --> O["[User] Đóng / Tiếp tục học"]
-    N -- Không / Cần sửa --> P["[User] Gửi phản hồi 👎 (Lưu Trace log hệ thống)"]
+    L --> M["[Học viên] Bấm trích dẫn [trang N] để đối chiếu trực tiếp trên Slide"]
+    L --> N{"[Học viên] Đánh giá hữu ích?"}
+    N -- "Hài lòng 👍" --> FIN3["[Tiếp tục học]"]
+    N -- "Không hài lòng 👎" --> P["[Feedback] Lưu vết Trace Log để audit"]
     P --> B
-
-    %% Styling màu sắc đặt hoàn toàn ở cuối
-    classDef aiStyle fill:#f9f,stroke:#333,stroke-width:2px,color:#000;
-    classDef userStyle fill:#bbf,stroke:#333,stroke-width:1px,color:#000;
-    classDef sysStyle fill:#eee,stroke:#333,stroke-width:1px,color:#000;
-
-    class A,B,E,M,N,O,P userStyle;
-    class C,D,G,I,J,K aiStyle;
-    class F,H,L,X sysStyle;
 ```

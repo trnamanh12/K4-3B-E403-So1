@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VLearn · Hỏi cùng tài liệu</title>
+<style>
+  :root {font-family:system-ui,sans-serif;color:#172d35;background:#f4f7f6}
+  body {max-width:1160px;margin:32px auto;padding:0 20px} h1 {margin-bottom:6px}
+  .muted {color:#53666b} main {display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}
+  section {background:white;border:1px solid #dce5e2;border-radius:14px;padding:22px}
+  label {display:block;margin:16px 0 6px;font-weight:600} select,textarea,input,button {font:inherit;box-sizing:border-box}
+  select,textarea,input {width:100%;padding:10px;border:1px solid #bccdc8;border-radius:7px;background:white}
+  textarea {resize:vertical;line-height:1.6} #source {height:340px} #question {height:110px}
+  button {padding:10px 16px;border:0;border-radius:7px;background:#146c57;color:white;cursor:pointer;margin:12px 8px 0 0}
+  button:disabled {opacity:.5;cursor:wait} #answer {white-space:pre-wrap;line-height:1.7}
+  #citations a {display:block;margin:10px 0;color:#146c57} #status {font-weight:600;margin-top:18px}
+  #error {color:#a22d21;white-space:pre-wrap} details {margin-top:18px} #feedback {display:none}
+  @media(max-width:760px) {main {grid-template-columns:1fr}}
+</style>
+<h1>Hỏi cùng tài liệu</h1>
+<p class="muted">Chọn một trang hoặc đoạn bài giảng, bôi đen phần cần giải thích và đặt câu hỏi.</p>
+<details><summary>Kết nối</summary><label for="token">Mã truy cập (nếu được yêu cầu)</label>
+<input id="token" type="password" autocomplete="off"><button id="connect">Kết nối</button></details>
+<p id="error" role="alert"></p>
+<main>
+  <section>
+    <label for="snapshot">Bộ tài liệu</label><select id="snapshot"></select>
+    <label for="document">Tài liệu</label><select id="document"></select>
+    <label for="unit">Trang / đoạn</label><select id="unit"></select>
+    <p id="quality" class="muted"></p>
+    <textarea id="source" readonly aria-label="Nội dung nguồn để bôi đen"></textarea>
+    <a id="original" target="_blank" rel="noopener">Mở nguồn gốc</a>
+  </section>
+  <section>
+    <label for="mode">Phạm vi trả lời</label>
+    <select id="mode"><option value="STRICT_SOURCE">Chỉ nguồn đang chọn</option>
+      <option value="LESSON_EXPANDED">Tìm thêm trong cùng bài học</option></select>
+    <p class="muted">Không bôi đen: dùng toàn bộ trang/đoạn đang hiển thị.</p>
+    <label for="question">Câu hỏi của bạn</label><textarea id="question" placeholder="Phần này có nghĩa là gì?"></textarea>
+    <button id="ask">Giải thích</button><button id="search">Tìm bằng chứng</button>
+    <p id="status" aria-live="polite"></p><div id="answer"></div><div id="citations"></div>
+    <div id="feedback"><span>Câu trả lời có hữu ích?</span><button id="up">Có</button><button id="down">Chưa</button></div>
+  </section>
+</main>
+<script>
+  const $ = id => document.getElementById(id);
+  let current = null, trace = null, selection = null;
+  async function api(path, body) {
+    const headers = {'Content-Type':'application/json'};
+    if ($('token').value) headers.Authorization = 'Bearer ' + $('token').value;
+    const response = await fetch(path, {method:body === undefined?'GET':'POST',headers,
+      body:body === undefined?undefined:JSON.stringify(body)});
+    const data = await response.json();
+    if (!response.ok) throw new Error(typeof data.detail === 'string'?data.detail:JSON.stringify(data.detail));
+    return data;
+  }
+  function options(id, rows, value, label) {
+    $(id).replaceChildren(...rows.map(row => new Option(label(row), value(row))));
+  }
+  async function guarded(fn) { $('error').textContent=''; try {await fn();} catch(e) {$('error').textContent=e.message;} }
+  async function connect() {
+    await api('/api/session', {});
+    const c = await api('/api/corpus');
+    options('snapshot', c.snapshots, x=>x.id, x=>x.id.slice(0,8)+(x.id===c.active?' · đang dùng':''));
+    if (c.active) $('snapshot').value=c.active;
+    if (!c.snapshots.length) throw new Error('Chưa có tài liệu. Chạy vlearn prepare trước.');
+    await documents();
+  }
+  async function documents() {
+    const docs = await api('/api/documents/'+$('snapshot').value);
+    options('document',docs,x=>x.id,x=>x.filename); await units();
+  }
+  async function units() {
+    const rows = await api('/api/units/'+$('snapshot').value+'/'+$('document').value);
+    options('unit',rows,x=>x.id,x=>(x.pdf_page?'Trang '+x.pdf_page:x.segment_id)+' · '+x.section_title);
+    await source();
+  }
+  async function source() {
+    current = await api('/api/sources/'+$('snapshot').value+'/'+$('unit').value);
+    $('source').value=current.text; selection=null;
+    $('quality').textContent=current.evidence_eligible?'Nguồn đã sẵn sàng để đối chiếu.':'Nguồn này cần kiểm tra trước khi dùng làm bằng chứng.';
+    $('original').href='/sources/'+$('snapshot').value+'/'+current.id;
+    $('mode').options[1].disabled=!current.lesson_id;
+    if (!current.lesson_id) $('mode').value='STRICT_SOURCE';
+  }
+  function captureSelection() {
+    const t=$('source');
+    // JS offsets are UTF-16; the backend uses Unicode code points.
+    selection=t.selectionStart===t.selectionEnd?null:{
+      start:Array.from(t.value.slice(0,t.selectionStart)).length,
+      end:Array.from(t.value.slice(0,t.selectionEnd)).length};
+  }
+  function addCitation(label,url) {
+    const a=document.createElement('a'); a.textContent=label; a.href=url; a.target='_blank'; a.rel='noopener';
+    $('citations').append(a);
+  }
+  async function submit(searchOnly) {
+    if (!current) throw new Error('Chọn nguồn trước.');
+    const question=$('question').value.trim(); if (!question) throw new Error('Nhập câu hỏi trước.');
+    const body={question,mode:$('mode').value,snapshot_id:$('snapshot').value,lesson_id:current.lesson_id,
+      selections:[{unit_id:current.id,...(selection||{})}]};
+    $('ask').disabled=$('search').disabled=true; $('status').textContent='Đang đối chiếu tài liệu…';
+    $('answer').textContent=''; $('citations').replaceChildren(); $('feedback').style.display='none';
+    try {
+      const result=await api(searchOnly?'/api/search':'/api/ask',body);
+      if (searchOnly) {
+        $('status').textContent=result.evidence.length+' đoạn bằng chứng';
+        $('answer').textContent=result.evidence.map(e=>e.text).join('\n\n────────\n\n');
+        result.evidence.forEach(e=>addCitation(e.unit_id,'/sources/'+body.snapshot_id+'/'+e.unit_id+'?start='+e.start+'&end='+e.end));
+      } else {
+        const statuses={GROUNDED:'Có căn cứ',INSUFFICIENT_GROUNDING:'Chưa đủ căn cứ',AMBIGUOUS:'Cần làm rõ',OUT_OF_SCOPE:'Ngoài phạm vi'};
+        $('status').textContent=statuses[result.final_status]||result.final_status;
+        $('answer').textContent=result.final_response;
+        result.citations.forEach(c=>addCitation(c.label,c.viewer_url)); trace=result.trace_id;
+        $('feedback').style.display='block';
+      }
+    } catch(e) {$('status').textContent='Không hoàn thành yêu cầu';throw e;}
+    finally {$('ask').disabled=$('search').disabled=false;}
+  }
+  $('connect').onclick=()=>guarded(connect);
+  $('snapshot').onchange=()=>guarded(documents); $('document').onchange=()=>guarded(units);
+  $('unit').onchange=()=>guarded(source); $('source').onselect=captureSelection;
+  $('ask').onclick=()=>guarded(()=>submit(false)); $('search').onclick=()=>guarded(()=>submit(true));
+  for (const id of ['up','down']) $(id).onclick=()=>guarded(async()=>{
+    await api('/api/feedback',{trace_id:trace,helpful:id==='up'}); $('feedback').style.display='none';
+  });
+  guarded(connect);
+</script>
+</html>
