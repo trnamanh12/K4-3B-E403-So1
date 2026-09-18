@@ -1,0 +1,22 @@
+[
+  {"id":"R01","source_turn_id":"T00092","question":"Attention là gì và giúp token dùng thông tin từ các token khác như thế nào?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p015"]},
+  {"id":"R02","source_turn_id":"T00238","question":"Context của mô hình ngôn ngữ là gì?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p014"]},
+  {"id":"R03","source_turn_id":"T00371","question":"Làm thế nào quản lý context để dùng AI hiệu quả?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p016"]},
+  {"id":"R04","source_turn_id":"T00390","question":"RLHF gồm ba bước nào để biến mô hình thành trợ lý biết nghe lời?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p019"]},
+  {"id":"R05","source_turn_id":"T00398","question":"Với prompt dài nên đặt yêu cầu quan trọng ở vị trí nào?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p016"]},
+  {"id":"R06","source_turn_id":"T00487","question":"Temperature và top_p khác nhau như thế nào?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p029"]},
+  {"id":"R07","source_turn_id":"T00466","question":"Từ LLM đến agent có bốn mức độ năng lực nào?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p023"]},
+  {"id":"R08","source_turn_id":"T00123","question":"Chi phí token đầu vào và đầu ra khác nhau như thế nào?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p027"]},
+  {"id":"R09","source_turn_id":"T02103","question":"Problem Statement cần mô tả bài toán và đối tượng người dùng như thế nào?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p009"]},
+  {"id":"R10","source_turn_id":"T09475","question":"Precision và recall khác nhau như thế nào trong đánh giá hệ thống?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p023"]},
+  {"id":"R11","source_turn_id":"T09449","question":"Temperature và top_p dùng để làm gì khi gọi API?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p029"]},
+  {"id":"R12","source_turn_id":null,"question":"Token là gì, vì sao model không đọc nguyên từ?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p013"]},
+  {"id":"R13","source_turn_id":null,"question":"Bốn thành phần của một prompt gồm những gì?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p028"]},
+  {"id":"R14","source_turn_id":null,"question":"Một agent có năm bộ phận nào tạo thành vòng lặp?","lesson_id":"day-1","expected_sources":["d1-slide-hackathon:p024"]},
+  {"id":"R15","source_turn_id":null,"question":"Baseline, target và measurement dùng để định lượng bài toán như thế nào?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p011"]},
+  {"id":"R16","source_turn_id":null,"question":"Output metric khác outcome metric như thế nào?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p012"]},
+  {"id":"R17","source_turn_id":null,"question":"Automate và augment khác nhau như thế nào?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p017"]},
+  {"id":"R18","source_turn_id":null,"question":"Khi nào nên dùng rule thay vì workflow hoặc agent?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p019"]},
+  {"id":"R19","source_turn_id":null,"question":"Prompt chaining, routing và parallelization là các mẫu workflow gì?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p020"]},
+  {"id":"R20","source_turn_id":null,"question":"Quyết định Go, Not Yet và No-Go cho một bài toán AI dựa vào điều gì?","lesson_id":"day-2","expected_sources":["d2-slide-hackathon:p028"]}
+]

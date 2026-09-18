@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+node_modules/
+.vscode/
+further_reading/
+*.db
+canvas-cp1.md

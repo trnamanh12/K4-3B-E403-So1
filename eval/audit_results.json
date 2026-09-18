@@ -1,0 +1,203 @@
+[
+  {
+    "index": 1,
+    "turn_id": "T00001",
+    "page_ref": "Trang 2",
+    "context_snippet": "Day 1 giới thiệu những chủ đề chính nào? Hãy trả lời ngắn gọn và trích dẫn trang.",
+    "question": "Day 1 giới thiệu những chủ đề chính nào? Hãy trả lời ngắn gọn và trích dẫn trang.",
+    "old_tutor_reply_summary": "Day 1 (với chủ đề **LLM Foundation**) tập trung vào các nội dung chính sau:  *   **Ba nhóm AI chính:** Bao gồm Discrimin",
+    "old_has_citation": "True",
+    "old_rating": "",
+    "new_final_status": "GROUNDED",
+    "new_response": "Day 1 giới thiệu những chủ đề chính nào? Hãy trả lời ngắn gọn và trích dẫn trang [trang 2].",
+    "decision_steps": [
+      "C_Quyet_dinh_1",
+      "G_Quyet_dinh_2",
+      "J_AI_Generation",
+      "K_AI_Validator_Quyet_dinh_3"
+    ]
+  },
+  {
+    "index": 2,
+    "turn_id": "T00002",
+    "page_ref": "Trang 6",
+    "context_snippet": "hii",
+    "question": "hii",
+    "old_tutor_reply_summary": "Chào bạn! Tôi là trợ lý học tập cho bài học Ngày 2 về **Xác định bài toán kinh doanh cho AI** [trang 1]. Tôi có thể hỗ t",
+    "old_has_citation": "True",
+    "old_rating": "",
+    "new_final_status": "AMBIGUOUS",
+    "new_response": "Mình cần một câu hỏi làm rõ hơn từ bạn: bạn đang muốn hỏi về nội dung trang 5–10 hoặc ý nghĩa khác?",
+    "decision_steps": [
+      "C_Quyet_dinh_1"
+    ]
+  },
+  {
+    "index": 3,
+    "turn_id": "T00003",
+    "page_ref": "Trang 6",
+    "context_snippet": "tài liệu này nói về cái chi dợ.",
+    "question": "tài liệu này nói về cái chi dợ.",
+    "old_tutor_reply_summary": "Tài liệu này tập trung vào chủ đề **\"Xác Định Bài Toán Kinh Doanh Cho AI\"** [trang 1]. Cụ thể, bài học sẽ hướng dẫn bạn:",
+    "old_has_citation": "True",
+    "old_rating": "",
+    "new_final_status": "GROUNDED",
+    "new_response": "tài liệu này nói về cái chi dợ [trang 6].",
+    "decision_steps": [
+      "C_Quyet_dinh_1",
+      "G_Quyet_dinh_2",
+      "J_AI_Generation",
+      "K_AI_Validator_Quyet_dinh_3"
+    ]
+  },
+  {
+    "index": 4,
+    "turn_id": "T00004",
+    "page_ref": "Trang 1",
+    "context_snippet": "Tóm tắt ngắn gọn nội dung chính của Day 1 và trích dẫn trang slide.",
+    "question": "Tóm tắt ngắn gọn nội dung chính của Day 1 và trích dẫn trang slide.",
+    "old_tutor_reply_summary": "Nội dung chính của Day 1 tập trung vào việc thiết lập nền tảng về AI và LLM, cụ thể bao gồm các ý chính sau:  *   **Hệ t",
+    "old_has_citation": "True",
+    "old_rating": "",
+    "new_final_status": "GROUNDED",
+    "new_response": "Tóm tắt ngắn gọn nội dung chính của Day 1 và trích dẫn trang slide [trang 1].",
+    "decision_steps": [
+      "C_Quyet_dinh_1",
+      "G_Quyet_dinh_2",
+      "J_AI_Generation",
+      "K_AI_Validator_Quyet_dinh_3"
+    ]
+  },
+  {
+    "index": 5,
+    "turn_id": "T00005",
+    "page_ref": "Trang 2",
+    "context_snippet": "asds",
+    "question": "asds",
+    "old_tutor_reply_summary": "Xin lỗi, mình chưa hiểu ý bạn qua tin nhắn \"asds\". Bạn có thắc mắc gì thêm hay cần mình giải thích rõ hơn về phần nào tr",
+    "old_has_citation": "False",
+    "old_rating": "",
+    "new_final_status": "AMBIGUOUS",
+    "new_response": "Mình cần một câu hỏi làm rõ hơn từ bạn: bạn đang muốn hỏi về nội dung trang 5–10 hoặc ý nghĩa khác?",
+    "decision_steps": [
+      "C_Quyet_dinh_1"
+    ]
+  },
+  {
+    "index": 6,
+    "turn_id": "T00008",
+    "page_ref": "Trang 1",
+    "context_snippet": "hả",
+    "question": "hả",
+    "old_tutor_reply_summary": "Có vẻ như bạn đang thắc mắc về nội dung chúng ta sẽ trao đổi?   Bài học Ngày 2 này tập trung vào bước khởi đầu của mọi d",
+    "old_has_citation": "True",
+    "old_rating": "",
+    "new_final_status": "AMBIGUOUS",
+    "new_response": "Mình cần một câu hỏi làm rõ hơn từ bạn: bạn đang muốn hỏi về nội dung trang 5–10 hoặc ý nghĩa khác?",
+    "decision_steps": [
+      "C_Quyet_dinh_1"
+    ]
+  },
+  {
+    "index": 7,
+    "turn_id": "T00018",
+    "page_ref": "Trang 1",
+    "context_snippet": "cho toi xin thong tin chuong trinh, gio hoc cu the",
+    "question": "cho toi xin thong tin chuong trinh, gio hoc cu the",
+    "old_tutor_reply_summary": "Rất tiếc, qua tra cứu tài liệu \"20K-AI-Handbook_final\", tôi không tìm thấy thông tin cụ thể về lịch trình hoặc giờ học c",
+    "old_has_citation": "False",
+    "old_rating": "",
+    "new_final_status": "GROUNDED",
+    "new_response": "cho toi xin thong tin chuong trinh, gio hoc cu the [trang 1].",
+    "decision_steps": [
+      "C_Quyet_dinh_1",
+      "G_Quyet_dinh_2",
+      "J_AI_Generation",
+      "K_AI_Validator_Quyet_dinh_3"
+    ]
+  },
+  {
+    "index": 8,
+    "turn_id": "T00079",
+    "page_ref": "Trang 33",
+    "context_snippet": "tóm tắt slide này",
+    "question": "tóm tắt slide này",
+    "old_tutor_reply_summary": "Rất tiếc là tôi đã tra cứu trong tài liệu nhưng chưa tìm thấy nội dung cụ thể của **Trang 33**. Kết quả tìm kiếm chỉ hiể",
+    "old_has_citation": "False",
+    "old_rating": "down",
+    "new_final_status": "GROUNDED",
+    "new_response": "tóm tắt slide này [trang 33].",
+    "decision_steps": [
+      "C_Quyet_dinh_1",
+      "G_Quyet_dinh_2",
+      "J_AI_Generation",
+      "K_AI_Validator_Quyet_dinh_3"
+    ]
+  },
+  {
+    "index": 9,
+    "turn_id": "T00111",
+    "page_ref": "Trang 10",
+    "context_snippet": "slide 9 là gì",
+    "question": "slide 9 là gì",
+    "old_tutor_reply_summary": "Rất tiếc là mình đã thử tra cứu nhưng chưa tìm thấy nội dung cụ thể được đánh dấu là \"slide 9\" trong tài liệu hiện tại. ",
+    "old_has_citation": "False",
+    "old_rating": "down",
+    "new_final_status": "GROUNDED",
+    "new_response": "slide 9 là gì [trang 10].",
+    "decision_steps": [
+      "C_Quyet_dinh_1",
+      "G_Quyet_dinh_2",
+      "J_AI_Generation",
+      "K_AI_Validator_Quyet_dinh_3"
+    ]
+  },
+  {
+    "index": 10,
+    "turn_id": "T00128",
+    "page_ref": "Trang 1",
+    "context_snippet": "giải thích cho tôi toàn bộ slide trong này đi",
+    "question": "giải thích cho tôi toàn bộ slide trong này đi",
+    "old_tutor_reply_summary": "Rất tiếc là mình đã thử tra cứu các từ khóa tổng quát như \"tổng quan\", \"nội dung\" hay \"giới thiệu\" nhưng chưa tìm thấy k",
+    "old_has_citation": "False",
+    "old_rating": "down",
+    "new_final_status": "GROUNDED",
+    "new_response": "giải thích cho tôi toàn bộ slide trong này đi [trang 1].",
+    "decision_steps": [
+      "C_Quyet_dinh_1",
+      "G_Quyet_dinh_2",
+      "J_AI_Generation",
+      "K_AI_Validator_Quyet_dinh_3"
+    ]
+  },
+  {
+    "index": 11,
+    "turn_id": "T00185",
+    "page_ref": "Trang 37",
+    "context_snippet": "r",
+    "question": "r",
+    "old_tutor_reply_summary": "Rất tiếc, tôi không tìm thấy nội dung cụ thể nào tại trang 37 trong tài liệu bài học. Bạn có thể cho biết thêm về chủ đề",
+    "old_has_citation": "False",
+    "old_rating": "down",
+    "new_final_status": "AMBIGUOUS",
+    "new_response": "Mình cần một câu hỏi làm rõ hơn từ bạn: bạn đang muốn hỏi về nội dung trang 5–10 hoặc ý nghĩa khác?",
+    "decision_steps": [
+      "C_Quyet_dinh_1"
+    ]
+  },
+  {
+    "index": 12,
+    "turn_id": "T00189",
+    "page_ref": "Trang 13",
+    "context_snippet": "bạn là GPT hay Claude hay Gemini",
+    "question": "bạn là GPT hay Claude hay Gemini",
+    "old_tutor_reply_summary": "Tôi là một trợ lý AI được thiết kế chuyên biệt để hỗ trợ học tập tại VinUniversity. Tôi không thuộc về bất kỳ mô hình th",
+    "old_has_citation": "False",
+    "old_rating": "",
+    "new_final_status": "OUT_OF_SCOPE",
+    "new_response": "Mình hoạt động với vai trò AI Tutor hỗ trợ học tập trên nền tảng VLearn; hệ thống không có thông tin xác minh về model nền.",
+    "decision_steps": [
+      "C_Quyet_dinh_1"
+    ]
+  }
+]
