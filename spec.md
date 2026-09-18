@@ -14,7 +14,7 @@ Loại: [x] Tối ưu tính năng có sẵn  [ ] Tính năng mới
 | 4 | **Bằng chứng đầu** | Trong 2.555 lượt hỏi K4 không phải câu mẫu, 838 lượt không có citation (32,8%), đến từ 191 học viên. Cách đếm: lọc `cohort_hint=K4`, `is_preset=false`, rồi đếm `has_citation=false`. Ví dụ: `T10288`, `T10342`, `T10472`, `T11700`, `T12544`. |
 | 5 | **Lát cắt một câu** | **Minh đang đọc bài hỏi để làm rõ một nội dung. AI quyết định có đủ đoạn nguồn hỗ trợ hay không và chỉ trả lời khi đủ căn cứ. Học viên nhận câu trả lời ngắn kèm nguồn nếu AI tự làm được.** |
 | 6 | **AI tự làm đến đâu** | AI tự trả lời chỉ khi câu hỏi đủ rõ và các đoạn trong tài liệu được phép dùng hỗ trợ trực tiếp, đầy đủ cho câu trả lời; mọi claim phải có citation hợp lệ. Nếu câu hỏi mơ hồ, AI hỏi một câu làm rõ. Nếu nguồn thiếu, yếu, chỉ hỗ trợ một phần, mâu thuẫn hoặc ngoài phạm vi, AI không đoán mà nêu giới hạn và hướng user tới tài liệu chính thức hoặc TA. Chọn Conditional vì trả lời sai có thể làm học viên học/làm bài sai, nhưng yêu cầu con người duyệt mọi câu sẽ làm mất lợi ích hỗ trợ tức thời.<br/>*(Willing users dự kiến: Châu Tùng Dương, Nguyễn Đình Tuấn Anh, Đỗ Mạnh Nghĩa, Nguyễn Ngọc Tuyền).* |
-| 7 | **Phân công** | • **Trần Nam Anh** - 2A202602901: AI <br> • **Hoàng Anh Minh** - 2A202602566: UI<br>• **Hoàng Phong** - 2A202602943: Dữ liệu<br>• **Lê Trung Kiên** - 2A202602748: Backend|
+| 7 | **Phân công** | • **Trần Nam Anh** - 2A202602901: AI, Data, Nhóm trưởng <br> • **Hoàng Anh Minh** - 2A202602566: UI, AI, Backend <br>• **Hoàng Phong** - 2A202602943: Dữ liệu<br>• **Lê Trung Kiên** - 2A202602748: Backend|
 
 ---
 
@@ -315,10 +315,10 @@ Toàn bộ 20 case được phát triển trực tiếp từ các lượt hội 
 
 | Họ và Tên | Mã Học Viên | Vai trò chính | Đầu ra phụ trách trong Repo | Nhiệm vụ bắt buộc phải giải thích được khi Q&A tại CP6 |
 |---|---|---|---|---|
-| **Hoàng Anh Minh** | 2A202602566 | UI | `codebase/static/`<br/>`flowchart.md` | Vị trí hiện thực hoá 6 nguyên tắc HAX/PAIR trên giao diện; cơ chế hiển thị badge trạng thái và tương tác cuộn tới citation. |
-| **Hoàng Phong** | 2A202602943 | Dữ liệu | `evidence/mining-method.md`<br/>`codebase/rag_indexer.py` | Phương pháp lọc và đếm 838 lượt lỗi trong `tutor_turns.csv`; chiến lược phân đoạn (chunking) tài liệu slide/transcript. |
-| **Lê Trung Kiên** | 2A202602748 | Backend | `codebase/web_server.py`<br/>`eval/trace_log.json` | Kiến trúc Web API, bộ điều tiết Rate Limiter (Gemini 14 RPM), cơ chế Self-Correction Validator và cấu trúc Trace Log. |
-| **Trần Nam Anh** | 2A202602901 | AI | `codebase/core_decision.py`<br/>`eval/k4_rag_20_cases.md` | Bản chất thuật toán của 3 Cổng quyết định Tri-Gate; cơ chế định nghĩa và đo lường 4 chiều chất lượng của Golden Set. |
+| **Hoàng Anh Minh** | 2A202602566 | UI | `codebase/static/`<br/>`flowchart.md` | AI, UI |
+| **Hoàng Phong** | 2A202602943 | Dữ liệu | `evidence/mining-method.md`<br/>`codebase/rag_indexer.py` | Data |
+| **Lê Trung Kiên** | 2A202602748 | Backend | `codebase/web_server.py`<br/>`eval/trace_log.json` | Backend, UI |
+| **Trần Nam Anh** | 2A202602901 | AI | `codebase/core_decision.py`<br/>`eval/k4_rag_20_cases.md` | AI, Data |
 
 ### 8.2 Willing Users & Kế hoạch vòng thử nghiệm người dùng (Validation Bonus)
 - **Danh sách người thử nghiệm ngoài nhóm đã cam kết:**
