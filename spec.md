@@ -1,4 +1,4 @@
-# AI SPEC — Tutor trả lời có căn cứ (Grounded Tutor) · Nhóm K4-3B-E403-So1 · Zone 1
+# AI SPEC — Tutor trả lời có căn cứ (Grounded Tutor) · Nhóm K4-3B-E403-So1 · Zone 6
 Hướng: [x] A — VLearn  [ ] B — Trợ lý Học viên  [ ] C — Làn mở  
 Loại: [x] Tối ưu tính năng có sẵn  [ ] Tính năng mới
 
